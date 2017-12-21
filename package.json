@@ -1,0 +1,15 @@
+{
+  "name": "student-bot",
+  "version": "0.0.1",
+  "description": "Bot para facilitar o uso do SIGA para os alunos do Centro Paula Souza ",
+  "main": "bot/bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Felipe Menino",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "fatec-api": "^1.0.0",
+    "telegraf": "^3.17.2"
+  }
+}
