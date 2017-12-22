@@ -12,7 +12,6 @@ bot.start((ctx) => {
   'Vamos realizar o registro de seus dados, para que eu possa acessar seus dados',
   Markup.inlineKeyboard([
     Markup.callbackButton('➡️ Continuar', 'next')]).extra());
-
   utils.configAccount(bot);
 })
 
