@@ -7,30 +7,36 @@ const WizardScene = require('telegraf/scenes/wizard')
 
 const fatecApi = require('fatec-api')
 
-function autenticaSiga(user, passwd, bot){
+async function verifyAuth(user, passwd){
+  /*
+    Função auxiliar para a verificação da autenticação do usuário
+  */
+
   const minhaConta = new fatecApi.Account(user.toUpperCase(), passwd.toUpperCase());
 
-  minhaConta.getName().then(nome => {
-    bot.reply('Autenticação feita com sucesso, bem-vindo ' + nome);
+  await minhaConta.getName().then(nome => {
+    console.log(nome + ' fez login com o bot');
   })
+  return minhaConta.isLogged();
 }
 
 function configAccount(bot){
+    /*
+      Função para realizar as configurações de conta do usuário
+    */
 
   var user = '';
   var passwd = '';
 
   // Criando passo-a-passo para a aquisição das informações do usuário
-  const superWizard = new WizardScene('super-wizard',
+  const configAccount = new WizardScene('configAccount',
     (ctx) => {
       ctx.reply('A configuração é rápida e simples, será feita em 3 etapas, vamos lá!', Markup.inlineKeyboard([
         Markup.callbackButton('➡️ Continuar', 'next')]).extra());
-
       return ctx.wizard.next();
     },
     (ctx) => {
       ctx.reply('Insira seu nome de usuário do SIGA');
-
 
       return ctx.wizard.next();
     },
@@ -44,19 +50,23 @@ function configAccount(bot){
     (ctx) => {
       // Salvando as informações
       passwd = ctx.message.text;
-      
-      ctx.reply('Lembrando que meu código está disponível no Github', Markup.inlineKeyboard([
-        Markup.urlButton('Visitar Github ❤️', 'https://github.com/M3nin0/estudioso-bot'),
-        Markup.callbackButton('➡️ Continuar', 'next')
-      ]).extra())
 
-      return ctx.wizard.next()
+      auth = verifyAuth(user, passwd, bot);
+      if (auth) {
+        ctx.reply('O login foi feito com sucesso ❤️');
+        ctx.reply('Para ver as opções utilize /Menu');
+        return ctx.scene.leave()
+      } else {
+        ctx.reply('Não consegui fazer seu login 😓', Markup.inlineKeyboard([
+          Markup.callbackButton('➡️ Inserir informações novamente', 'next')]).extra());
+        return ctx.wizard.next();
+      }
     }
   )
 
-  const stage = new Stage([superWizard], { default: 'super-wizard' });
+  const stage_config = new Stage([configAccount], { default: 'configAccount' });
   bot.use(session());
-  bot.use(stage.middleware());
+  bot.use(stage_config.middleware());
 }
 
 module.exports = {

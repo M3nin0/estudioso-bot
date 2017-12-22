@@ -12,7 +12,52 @@ bot.start((ctx) => {
   'Vamos realizar o registro de seus dados, para que eu possa acessar seus dados',
   Markup.inlineKeyboard([
     Markup.callbackButton('➡️ Continuar', 'next')]).extra());
+
+  // Configura a conta do usuário
   utils.configAccount(bot);
+})
+
+// Comandos ativos ao selecionar o keyboard
+bot.hears('Notas', (ctx) => {
+
+})
+
+bot.hears('Faltas', (ctx) => {
+
+})
+
+bot.hears('Perfil', (ctx) => {
+
+})
+
+bot.hears('Sobre', (ctx) => {
+  ctx.reply('Bot criado com ❤️ para facilitar o uso do SIGA');
+})
+
+bot.hears('☸ Configurações', (ctx) => {
+
+})
+
+// Definindo comandos básicos que poderão ser usados pelos usuários
+bot.command('Menu', (ctx) => {
+  ctx.reply('Opções disponíveis.', Markup
+    .keyboard([
+      ['Notas', 'Faltas'],
+      ['Perfil', 'Sobre'],
+      ['☸ Configurações']
+    ])
+    .oneTime()
+    .resize()
+    .extra()
+  )
+})
+
+bot.command('Ajustes', (ctx) => {
+  
+})
+
+bot.command('Ajuda', (ctx) => {
+
 })
 
 bot.startPolling();
