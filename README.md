@@ -9,3 +9,11 @@ Este Bot tem como objetivo, facilitar a interação do aluno com o sistema do Ce
 ## Tecnologias
 
 Utilizando do Fatec API, é possível ter as últimas informações disponíveis no SIGA.
+
+## ToDo
+
+- [] Adicionar banco de dados;
+- [] Controle de exceções;
+- [] Criar mais cenas.
+
+Acha que há mais coisas a serem adicionadas ? Abre uma issue ai.
