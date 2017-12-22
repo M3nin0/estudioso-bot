@@ -1,19 +1,19 @@
-const Telegraf = require('telegraf');
 const utils = require('./utils.js')
+const Telegraf = require('telegraf');
+const Markup = require('telegraf/markup')
 const config = require('./configs/config.json');
 
+// Instância do bot
 const bot = new Telegraf(config.telegram.key)
 
+// Comando inicial
 bot.start((ctx) => {
-  console.log('Iniciado: ', ctx.from.id)
-  return ctx.reply('Olá, como vai você ?')
+  ctx.reply('Olá! Seja bem-vindo, eu sou o Estudioso_Bot, e vou auxiliar você a utilizar o SIGA\n' +
+  'Vamos realizar o registro de seus dados, para que eu possa acessar seus dados',
+  Markup.inlineKeyboard([
+    Markup.callbackButton('➡️ Continuar', 'next')]).extra());
+
+  utils.configAccount(bot);
 })
 
-// Adicionando os comandos aceitos pelo bot
-bot.command('start', (ctx) => ctx.reply('Olá! Seja bem-vindo, eu sou o estudioso bot, e vou auxiliar você a utilizar o SIGA'))
-bot.command('ajuda', (ctx) => ctx.reply('No que posso ajudar ?'));
-bot.command('meu_nome', (ctx) => ctx.reply());
-// bot.command('perfil', (ctx) => )
-// bot.command('cadastrar', (ctx) => )
-
-bot.startPolling()
+bot.startPolling();
