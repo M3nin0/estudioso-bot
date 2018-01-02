@@ -20,3 +20,9 @@ Utilizando do Fatec API, é possível ter as últimas informações disponíveis
 - [ ] Criar mais cenas.
 
 Acha que há mais coisas a serem adicionadas ? Abre uma issue ai.
+
+# Mudanças
+
+Este projeto foi movido para o repositório: https://github.com/M3nin0/fatec-api-bot
+
+Este passo foi feito por questões de organização
