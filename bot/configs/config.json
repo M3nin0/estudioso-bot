@@ -1,5 +1,11 @@
 {
   "telegram": {
       "key": ""
+  },
+  "db": {
+    "host": "",
+    "user": "",
+    "password": "",
+    "database": "alunos"
   }
 }

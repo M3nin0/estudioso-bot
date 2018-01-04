@@ -20,9 +20,9 @@ async function verifyAuth(user, passwd){
   return minhaConta.isLogged();
 }
 
-function configAccount(bot){
+function configAccount(bot, conn){
     /*
-      Função para realizar as configurações de conta do usuário
+      Função para realizar as configurações de conta do usuário e salva no banco de dados
     */
 
   var user = '';
@@ -55,6 +55,7 @@ function configAccount(bot){
       if (auth) {
         ctx.reply('O login foi feito com sucesso ❤️');
         ctx.reply('Para ver as opções utilize /Menu');
+
         return ctx.scene.leave()
       } else {
         ctx.reply('Não consegui fazer seu login 😓', Markup.inlineKeyboard([

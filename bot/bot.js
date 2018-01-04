@@ -1,10 +1,26 @@
-const utils = require('./utils.js')
-const Telegraf = require('telegraf');
-const Markup = require('telegraf/markup')
-const config = require('./configs/config.json');
+const utils    =   require('./utils.js')
+const Telegraf =   require('telegraf');
+const Markup   =   require('telegraf/markup')
+const config   =   require('./configs/config.json');
+const mysql    =   require('mysql');
 
 // Instância do bot
 const bot = new Telegraf(config.telegram.key)
+
+// Faz a conexão com o banco de dados
+const conn = mysql.createConnection({
+  host     : config.db.host,
+  user     : config.db.user,
+  password : config.db.password,
+  database : config.db.database
+});
+
+try{
+  conn.connect()
+  console.log('Conexão com o banco de dados realizada com sucesso!');
+} catch(e) {
+  console.log('Erro ao tentar realizar conexão com banco de dados\n' + e);
+}
 
 // Comando inicial
 bot.start((ctx) => {
@@ -14,7 +30,7 @@ bot.start((ctx) => {
     Markup.callbackButton('➡️ Continuar', 'next')]).extra());
 
   // Configura a conta do usuário
-  utils.configAccount(bot);
+  utils.configAccount(bot, conn);
 })
 
 // Comandos ativos ao selecionar o keyboard
@@ -53,7 +69,7 @@ bot.command('Menu', (ctx) => {
 })
 
 bot.command('Ajustes', (ctx) => {
-  
+
 })
 
 bot.command('Ajuda', (ctx) => {
