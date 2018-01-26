@@ -5,6 +5,10 @@
 
 Bot que permite uma melhor interação entre os alunos do Centro Paula Souza e o SIGA (Sistema Integrado de Gestão Acadêmica)
 
+# Atenção
+
+Bot não mais utilizado! O novo está em: https://github.com/M3nin0/fatec-bot
+
 ## Objetivo
 
 Este Bot tem como objetivo, facilitar a interação do aluno com o sistema do Centro Paula Souza, o SIGA, sendo esta interação rápida e fácil.
